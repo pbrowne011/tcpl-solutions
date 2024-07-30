@@ -21,6 +21,8 @@
 
 int main(int argc, char** argv)
 {
+    // when compiled to assembly, certain characters are replaced
+    // with octal: \a and \v
     printf("Alert character: hello\aworld");
     printf("\n\n");
 
@@ -36,6 +38,8 @@ int main(int argc, char** argv)
     printf("Carriage return character: hello\rworld");
     printf("\n\n");
 
+    // this tab was only replaced with a space
+    // not sure why, maybe rounds to fourth character?
     printf("Horizontal tab character: hello\tworld");
     printf("\n\n");
 
@@ -46,9 +50,15 @@ int main(int argc, char** argv)
     printf("\n\n");
 
     // octal number must be 3 digits
+    // 8 ** 3 = 512 (9 bits vs. 8)
+    //
+    // these numbers are useful for permission bits and when
+    // dealing with signal flags
     printf("Octal number (0o145): \145");
     printf("\n\n");
 
+    // both this and the octal number are replaced with the char
+    // representation when compiled to assembly
     printf("Hexadecimal number (0x65): \x65");
     printf("\n\n");
 
