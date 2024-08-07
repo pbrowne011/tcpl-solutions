@@ -1,0 +1,36 @@
+Question: how would you test `wc.c` for bugs? What kinds of input bugs are most
+likely?
+
+I would test the program for bugs by comparing its output to several of the
+other wc utilities that exist today. There are many programs that are "correct"
+by the standards set in the instructions here, and using them would be like
+using an oracle that gave you the correct answers to every possible test
+question.
+
+In this case, the more interesting question is: what inputs do you test this
+program against? One would need a series of files that attempt to illustrate
+both common and uncommon cases, focusing particularly on edge cases. We could,
+for instance, test against every file in this repository. However, that limits
+the scope of our testing to C source files, a Makefile, and some text files
+(well, technically all of these are text files).
+
+Ignoring the world of non-regular files and files that contain anything except
+ASCII characters, interesting edge cases would include all of the vaid escape
+characters, or all ASCII characters for that matter. Better cases might include
+a series of whitespace characters, a file with no newlines, a file with one
+newline, a file with no characaters, a file with one newline character, or other
+smaller files. These are easier to manually verify, and represent one of the
+boundaries of the program's behavior.
+
+I would think that, if there are any bugs, the unusual files (with no newlines,
+no words, no characters, only spaces, only newlines) would be most likely to
+uncover them. However, I tested against an empty regular file, a file with one
+character and no newlines, and a file with only the newline character, and the
+program responded the same as Ubuntu's default `wc` utility.
+
+One might also consider looking at the logic of the program and trying to find
+bugs. Does it make sense to count a new word as soon as you see a non-space
+character? Why doesn't the program count, for instance, carriage returns or
+vertical tabs? What would happen if you counted words at the last character
+instead of the first (HINT: more bugs).
+
