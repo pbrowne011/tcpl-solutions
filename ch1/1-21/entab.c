@@ -6,9 +6,12 @@
  * It might be smarter to do this as a stream, as you don't have to recopy
  * memory every time you insert tabs. However, you'd have to use more global
  * state to track your relative and actual position on a line (column number,
- * first spaces position)
+ * first spaces position).g
+ *
+ * I cheated by including string.h.
  */
 #include <stdio.h>
+#include <string.h>
 #define MAXLINE 1000
 #define N 4
 
@@ -52,21 +55,18 @@ void entab(char s[], int len)
     sp=0;
     while (s[i]) {
         if ((s[i]!=' ') && (sp)) {
-            while (((i-sp)/N)<(i/N)) {
-                //insert tabs 
-                s[j++]='\t';
-                sp-=N;
-            }
-            while (sp-->0) s[j++] = ' ';
-            i++;
+            while (((i-sp)/N)<(i/N)) t[j++]='\t', sp-=N;
+            while (sp-->0) t[j++] = ' ';
+            t[j++]=s[i++];
             sp=0;
-        } else if (s[i++] == ' ') {
+        } else if (s[i] == ' ') {
+            i++;
             sp++;
         } else {
             t[j++]=s[i++];
         }
     }
     t[j]='\0';
-    s=t;
+    strcpy(s,t);
 }
 
