@@ -44,7 +44,7 @@ int get_line(char s[], int lim)
     return i;
 }
 
-/* entab: a bit convoluted, may need to refactor */
+/* entab: uses a local buffer */
 void entab(char s[], int len)
 {
     int i, j, sp;
