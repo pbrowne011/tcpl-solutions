@@ -13,6 +13,7 @@ int main()
     char *str4 = "and a comment close later... */";
     char *str5 = "A legal \
         multi-line string";
+    char *str6 = "A string \"with quotes\"";
 
     return 0;
 }

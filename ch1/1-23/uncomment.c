@@ -11,7 +11,7 @@ int main()
     char token[2];
 
     sl=ml=str=0;
-    token[0]='\0';              /* note to self: token="aa" is U.B. */
+    token[0]='\0';              /* note to self: token="aa" is ub */
     
     while ((c=getchar())!=EOF) {
         token[0]=token[1];
@@ -29,7 +29,7 @@ int main()
         } else {
             if (token[0])
                 printf("%c", token[0]);
-            if (c=='"')
+            if (c=='"' && (token[0]!='\\'))
                 str=!str;
         }
     }
