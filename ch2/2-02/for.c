@@ -17,7 +17,13 @@ int get_line(char s[], int lim)
 {
     int c, i;
 
-    /* rewrite loop with if/else and break statements */
+    /* Rewrite loop with if/else and break statements
+     *
+     * Could also be rewritten using a while loop, or
+     * using some other variable j to store i and
+     * setting i >= lim-1 to break the loop (if you
+     * didn't "know" about break statements yet
+     */
     for (i=0; i<lim-1; ++i) {
         c=getchar();
         if (c==EOF)
