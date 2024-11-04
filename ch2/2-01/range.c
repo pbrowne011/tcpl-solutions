@@ -40,10 +40,11 @@ int main()
     printf("signed char:    min %22d\n", SCHAR_MIN);
     printf("                max %22d\n", SCHAR_MAX);
 
-    printf("short:          min %22hd\n", SHRT_MIN);
-    printf("                max %22hd\n", SHRT_MAX);
+    /* all types smaller than int have macros defined as const ints */
+    printf("short:          min %22d\n", SHRT_MIN);
+    printf("                max %22d\n", SHRT_MAX);
     printf("unsigned short: min %22u\n", 0);
-    printf("                max %22hu\n", USHRT_MAX);
+    printf("                max %22u\n", USHRT_MAX);
 
     printf("int:            min %22d\n", INT_MIN);
     printf("                max %22d\n", INT_MAX);

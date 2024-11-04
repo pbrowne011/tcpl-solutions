@@ -1,0 +1,41 @@
+In a two's complement system, subtraction is implemented as taking the inversion
+of the second operand and adding 1. For -1 specifically, this is represented as
+all bits being turned to 1.
+
+So when x-1 is performed, the actual operation is x+~0 = x+0xfffffff. Since x is
+unsigned, this is an addition operation where the most significant carry bit is
+discarded. If we have 8-bit numbers and x=8, then x-1 is represented as:
+
+carry bits 1 1 1 1 0 0 0 0
+
+x          0 0 0 0 1 0 0 0
+-1         1 1 1 1 1 1 1 1
+--------------------------
+x + (-1)   0 0 0 0 0 1 1 1
+
+This is equivalent to "invert all of the bits of x from the rightmost bit that
+is set". In the second example, where x=23:
+
+carry bits 1 1 1 1 1 1 1 0
+
+x          0 0 0 1 0 1 1 1
+-1         1 1 1 1 1 1 1 1
+--------------------------
+x + (-1)   0 0 0 1 0 1 1 0
+
+Here, only the last bit is inverted, as it is the rightmost bit that is set.
+
+Now, when we perform the and operation with x, we are anding together all of the
+bits of x __except the rightmost bit, which we just removed__. This is why
+performing x & (x-1) deletes the rightmost bit: in a two's complement
+representation, subtracting by 1 removes the rightmost bit and inverts the
+remaining bits.
+
+This works in a ones' complement system, but using -0 instead. Ones' complement
+has -0 = 0xfff..fff, where all of the ones are set, so adding this to x removes
+the leftmost bit from an unsigned number. Performing bitwise and with x produces
+the same result.
+
+One point on why this is so efficent - it uses two assembly instructions to
+remove the rightmost bit (AND, ADD), rather than using conditional branches to
+perform bit testing and shift operations.

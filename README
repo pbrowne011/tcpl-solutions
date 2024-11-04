@@ -1,0 +1,13 @@
+tcpl-solutions
+
+Solutions to Kernighan & Ritchie's book, "The C Programming Language", 2nd
+edition. All solutions were compiled using gcc 11.4.0.
+
+Exercises do not have a standardized format (yet). They contain as many test
+cases as I decided to test for a particular problem. The better-formatted ones
+have the implemented functions in separate source files. To compile, run
+commands similar to this one (for exercise 2-5):
+
+    $ gcc strpbrk.c test.c -o test
+
+    $ ./test < test.in
